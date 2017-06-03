@@ -18,7 +18,6 @@ IntlPenPals is a web application for global cultural exchange across languages. 
 2. As a **GUEST**, that is viewing the homepage, I can opt to sign up or sign in from the homepage
 3. As a **MEMBER**, that is viewing the homepage, I can opt to enter a chat or sign out
 
-
 ### Auth
 4. As a **GUEST**, I can input the necessary credentials to create an account as a **TEACHER**:
     - firstname
