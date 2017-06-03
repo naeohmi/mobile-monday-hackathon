@@ -59,3 +59,5 @@ IntlPenPals is a web application for global cultural exchange across languages. 
 17. As a **MEMBER**, I can confirm that I want to sign out
 18. As a **SYSTEM**, I can sign the user out
 
+
+## WIREFRAMES
