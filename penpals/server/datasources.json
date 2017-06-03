@@ -1,0 +1,15 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "penpal": {
+    "url": "https://2efe89d0-2249-4535-b16f-7757b3f97e00-bluemix:eaa7681a4b039287d2cdeea569330fea156ef684a64c238794127fe76a3affa7@2efe89d0-2249-4535-b16f-7757b3f97e00-bluemix.cloudant.com",
+    "database": "penpal",
+    "username": "2efe89d0-2249-4535-b16f-7757b3f97e00-bluemix",
+    "password": "eaa7681a4b039287d2cdeea569330fea156ef684a64c238794127fe76a3affa7",
+    "name": "penpal",
+    "modelIndex": "",
+    "connector": "cloudant"
+  }
+}
