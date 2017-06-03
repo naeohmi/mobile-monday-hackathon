@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "pubnub": "^4.10.0",
+    "watson-developer-cloud": "^2.32.1"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
