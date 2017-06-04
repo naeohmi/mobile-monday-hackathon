@@ -6,6 +6,7 @@ import watson from './watson';
 import Pubnub from 'pubnub';
 import PubJr from './PubJr';
 import Cookie from 'react-cookies';
+import Axios from 'axios';
 
 class Chat extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class Chat extends Component {
     this.text = undefined;
     this.state = {
       user: Cookie.load('userId'),
-      userLang: "",
+      userToken: Cookie.load('userToken'),
+      userLang: Cookie.load("Lang"),
       input: "",
       final: "",
       result: []
@@ -25,7 +27,7 @@ class Chat extends Component {
   }
 
   componentDidMount(){
-        console.log("mounted")
+        console.log("mounted", this.state.result)
            this.channelName = "anthony"
            let init = () => {
               this.Pub =  new Pubnub(Config)
@@ -49,13 +51,16 @@ class Chat extends Component {
                     },
                       //message is a string of text TODO set as state to render                                                ///////.  listening for messages in the channel
                     message: function(message) {
-                        console.log("New Message!!!!!!", message);
+                        console.log("New Message!!!!!!", message.message);
+                            // message.message.hasOwnProperty(self.state.userLang)
+                        // if(message.message["native"] === self.state.userLang){
+                        //   console.log("successssssssssss")
+                          let newData = self.state.result;
+                          newData.push(message.message.foriegn_translation)
+                           self.setState({result: newData})
 
-                        if(message.hasOwnProperty(self.state.userLang)){
-                           self.setState((prevState, props) => {
-                          return {result: prevState.result.push(message)};
-                          });
-                        }
+
+                        // }
 
                     },
                     presence: function(presenceEvent) {
@@ -68,6 +73,18 @@ class Chat extends Component {
                 subscribe(this.channelName)
                 listen(this)
 
+  }
+   checkName() {
+    /// `http://penpal.mybluemix.net/api/teachers?access_token=${this.state.token}`
+    let y = `http://penpal.mybluemix.net/api/teachers/${Cookie.load('userId')}?access_token=${Cookie.load('userToken')}`
+   return Axios.get(y)
+   .then((res) => {
+        console.log(res);
+
+         return  res.data.primaryLanguage
+      }).catch(function (err) {
+        console.log(err);
+      });
   }
 
 
@@ -96,14 +113,23 @@ class Chat extends Component {
   handleSubmit(e) {
     e.preventDefault();
     //initializes the
-    watson.changeText(this.state.input, this.state.userLang)
-      .then(data => {
+
+    let self = this
+    this.checkName().then(data => {
+
+      let r = data
+      let foreign = data === "en" ? "es" : "en";
+      console.log("data", data, "foreinnnn", foreign)
+       watson.changeText(self.state.input, data, foreign)
+        .then(data => {
         let userObj = {
-          native: this.state.input,
-          foriegn: data.translations[0].translation
+          native: self.state.userLang,
+          foriegn_translation: data.translations[0].translation
         }
-        let newData = this.state.result;
-        newData.push(data.translations[0].translation)
+        // let newData = this.state.result;
+        console.log(self.state.result)
+        console.log("yo foreign result.  +.  data", foreign, r)
+        // newData.push(data.translations[0].translation)
         // console.log(newData);
 
         //  console.log(this.state.input)
@@ -111,8 +137,12 @@ class Chat extends Component {
         //   result: newData
         // })
 
-        this.publishText(userObj)
+        self.publishText(userObj)
       })
+
+    })
+
+
   }
 
 
@@ -121,13 +151,14 @@ class Chat extends Component {
     console.log('stateLoop called!!!');
     if (this.state.result.length > 0) {
         return this.state.result.map((el, index) => {
-          return  <PubJr key={index} chatText={el}/>
+          return  <PubJr key={index} Lang={this.state.userId} chatText={el}/>
         })
     }
     return false
   }
 
   render() {
+    console.log(this.state.result)
     return (
       <div className="chat-container">
           {this.stateLoop()}

@@ -25,6 +25,7 @@ class App extends Component {
       registeredUser: [],
       loggedInUser: [],
       token: "",
+      userID: ""
 
     }
   }
@@ -74,8 +75,9 @@ class App extends Component {
       password: submittedPassword
     }).then((res) => {
       console.log(res);
-      Cookie.save('userId', res.data.id, { path: '/' })
-      this.setState({ loggedInUser: res.data, token: res.data.id, isLoggedIn: true });
+      Cookie.save('userToken', res.data.id, { path: '/' })
+      Cookie.save('userId', res.data.userId, { path: '/' })
+      this.setState({ loggedInUser: res.data, token: res.data.id, userID: res.data.userId, isLoggedIn: true });
       //console.log(this.state.loggedInUser);
     }).catch((err) => {
       console.log(err);
@@ -86,6 +88,18 @@ class App extends Component {
     axios.get("http://penpal.mybluemix.net/api/teachers/logout", {
       access_token: this.state.token
     }).then((res) => {
+        console.log(res);
+      }).catch(function (err) {
+        console.log(err);
+      });
+
+  }
+
+  checkName() {
+    /// `http://penpal.mybluemix.net/api/teachers?access_token=${this.state.token}`
+    let y = `http://penpal.mybluemix.net/api/teachers/${this.state.userID}?access_token=${this.state.token}`
+    axios.get(y)
+   .then((res) => {
         console.log(res);
       }).catch(function (err) {
         console.log(err);
@@ -103,6 +117,7 @@ class App extends Component {
       studentAge: userInfo[6]
     }).then((res) => {
       console.log(res);
+      Cookie.save('Lang', res.data.primaryLanguage, { path: '/' })
       this.setState({ registeredUser: res.data, isLoggedIn: true });
       //console.log(this.state.registeredUser);
     }).catch((err) => {

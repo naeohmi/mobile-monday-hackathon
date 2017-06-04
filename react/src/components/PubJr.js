@@ -11,7 +11,7 @@ import React, { Component } from 'react';
   render(){
     if(this.props.chatText){
          return(
-             <div>{`Hi ${this.props.chatText}`}</div>
+             <div>{`${this.props.Lang}: ${this.props.chatText}`}</div>
           )
     }else {
         return(

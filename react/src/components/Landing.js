@@ -18,10 +18,10 @@ class Landing extends Component {
       <div className="landing">
           <h3>Welcome to PenPal!</h3>
           <input type="text" placeholder="username" ref="username" className="form-input"/>
-          <input type="password" placeholder="password" ref="password" className="form-input"/>   
+          <input type="password" placeholder="password" ref="password" className="form-input"/>
 
 
-          <NavLink to="/signup" className="toggle-auth-type">Don't have an account? Sign Up!</NavLink><br/>
+          <NavLink to="/register" className="toggle-auth-type">Don't have an account? Sign Up!</NavLink><br/>
           <button type="button" onClick={() => this.checkUserData()} className="submit-btn">Log In</button>
       </div>
 </div>
