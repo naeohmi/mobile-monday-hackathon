@@ -160,7 +160,7 @@ class Chat extends Component {
     console.log(this.state.result)
     return (
       <div className="chat-container">
-          {this.stateLoop()}
+
 
           <form
             onSubmit={this.handleSubmit.bind(this)}
@@ -175,7 +175,7 @@ class Chat extends Component {
             </label>
             <input type="submit" value="Submit" />
           </form>
-
+           {this.stateLoop()}
       </div>
     );
   }
