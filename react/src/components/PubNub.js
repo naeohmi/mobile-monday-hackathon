@@ -15,19 +15,21 @@ class PubNub extends Component {
             }
             this.toChat = this.toChat.bind(this);
       }
-      toChat() {
-            //pubnub object with built in methods
-            this.pubObj = {
-            // Pub: new Pubnub(Config),
 
-            channelName: "",
 
-              init: () => {
+      // toChat() {
+      //       //pubnub object with built in methods
+      //       this.pubObj = {
+      //       // Pub: new Pubnub(Config),
+
+      //       channelName: "",
+
+              init(){
               this.Pub =  new Pubnub(Config)
               console.log(this.Pub)
+              }
 
-                },
-              publishText: (message) => {
+              publishText(message) {
                     console.log("inside the publish function!!");
                     let self = this;
 
@@ -38,17 +40,17 @@ class PubNub extends Component {
                     this.Pub.publish(publishConfig, function(status, response) {
                         console.log(status, response, "finished publishing");
                     })
-              },
+              }
 
-              subscribe: (channelName) => {
+              subscribe(channelName){
                  this.Pub.subscribe({
                     channels: [channelName]
                 });
                  this.channelName = channelName;
                  console.log("subscribed")
-              },
+              }
 
-              listen: () => {
+              listen(){
                 this.Pub.addListener({
                     status: function(statusEvent) {
                         if (statusEvent.category === "PNConnectedCategory") {
@@ -68,12 +70,13 @@ class PubNub extends Component {
                     }
                 })
               }
-            }
-          };
+
+
+
           render() {
             return (
               <div className="pubnub">
-                <PubNub />
+
               </div>
               )
           };
