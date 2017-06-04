@@ -65,11 +65,13 @@ class Chat extends Component {
 
   render() {
         return(
-      <div className= "App" >
+      <div className="chat-container">
 
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <label>
-          talk:
+      <form
+        onSubmit={this.handleSubmit.bind(this)}
+        className="chat-form"
+        >
+        <label className="chat-label">
           <input type="text" value={this.state.text} onChange={(e) => this.handleChange(e)} />
         </label>
         <input type="submit" value="Submit" />
