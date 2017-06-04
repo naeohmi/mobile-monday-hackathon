@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-// import WatsonTranslate from 'watson-developer-cloud/language-translator/v2';
 const WatsonTranslate = require('watson-developer-cloud/language-translator/v2');
 
 class Translate extends Component {
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
             txtToTrans: "",
             lang: "",
@@ -40,16 +39,13 @@ class Translate extends Component {
                     else {
                         console.log(JSON.stringify(translation, null, 2));
                     }
-                }
-
-            )
+                })
         } else {
             alert('not an input');
         }
     }
 
     render() {
-
         return (
             <div className="translate-container">
                 <h1 className="lang">{this.state.lang}</h1>

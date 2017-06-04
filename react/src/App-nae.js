@@ -31,8 +31,10 @@ class App extends Component {
             <Route path="/dashboard" exact component={() => (<Dashboard
 
             />)} />
-            {/*<Route path="/*" component={() => (<FourOFour />) }/>*/}
-            <Footer />
+           
+            <Route path="/*" component={() => (<NotFound
+            />) }/>
+
           </Switch>
         </div>
       </Router>
