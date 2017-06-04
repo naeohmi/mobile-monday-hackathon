@@ -12,8 +12,6 @@ class Landing extends Component {
 
   render() {
     return (
-
-      <div>
       <div className="landing">
           <h3>Welcome to PenPal!</h3>
           <input type="text" placeholder="username" ref="username"className="form-input"/>
