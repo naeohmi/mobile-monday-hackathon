@@ -83,10 +83,9 @@ Stories:
 
 - LoopBack API
 - IBM Watson API
-- Cloudinary API
+- Cloudant API
 - Google Maps API
 
 ### LoopBack API with Cloudant Database: http://penpal.mybluemix.net/explorer/#!/teacher/
-
 
 ![fun-kids](./assets/yay.jpg)
