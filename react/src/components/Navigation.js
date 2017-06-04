@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react'; // eslint-disable-next-line
 import { BrowserRouter as Route, NavLink, Link } from 'react-router-dom';
 
 export default function Navigation(props){
@@ -6,13 +6,13 @@ export default function Navigation(props){
         return (
             <div className="nav-container">
         <div className="logo">
-          <a href="/"><img src="../../../assets/logo/penpal_logo_white.png" alt="Logo" /></a>
+          <a href="/"><img src="/images/penpal_logo_darkblue.png" alt="Logo" /></a>
         </div>
     	  <nav className="nav">
     	     <ul className="nav-ul">
-    	       <li className="nav-li"><Link to="/">Home</Link></li>
-    	       <li className="nav-li"><NavLink to="/chat">Chat</NavLink></li>
-    	       <li className="nav-li"><NavLink to="/dashboard">Dashboard</NavLink></li>
+    	       <li className="nav-li"><Link to="/">home</Link></li>
+    	       <li className="nav-li"><NavLink to="/chat">chat</NavLink></li>
+    	       <li className="nav-li"><NavLink to="/dashboard">dashboard</NavLink></li>
           </ul>
     	  </nav>
 
