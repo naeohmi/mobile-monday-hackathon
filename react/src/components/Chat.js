@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import Config from './config.js';
 import Pubnub from 'pubnub';
 import Translate from './Translate';
-import side from './side';
+import watson from './watson';
 
 class Chat extends Component {
-
   constructor(props) {
     super(props);
     this.Pubnub = undefined;
@@ -15,31 +14,23 @@ class Chat extends Component {
       final: "",
       result: []
     }
-    this.componentDidMount = this.componentDidMount.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.finalState = this.finalState.bind(this);
   }
-
-  componentDidMount() {
-    // let pubNubVar = new Pubnub(Config)
-    // this.PubNub = Pubnub.init({
-    //   publish_key: Config.publishKey,
-    //   subscribe_key: Config.subscribeKey,
-    //   ssl: true,
-    // });
-  }
-
+  //handles the change of state when user types into the input field
   handleChange(e) {
-    this.text = e.target.value
+    this.text = e.target.value;
+    //sets the state of the input field
     this.setState(state => {
       input: state.input = this.text
     })
   }
-
+  //when user clicks the submit button - updates the state
   handleSubmit(e) {
     e.preventDefault();
-    side.changeText(this.state.input)
+    //initializes the 
+    watson.changeText(this.state.input)
       .then(data => {
         let newData = this.state.result;
         newData.push(data.translations[0].translation)
@@ -47,34 +38,39 @@ class Chat extends Component {
 
         //  console.log(this.state.input)
         this.setState((prevState) => {
-          {result: newData}
+          { result: newData }
         })
       })
   }
-
-  finalState() {
-        // console.log('finalState');
-        if(this.state.result) {
-          return this.state.result.map((el, index) => {
-            console.log(el)
-            return <h1 key={index}> {el} </h1>
-          })
-        }
+  //loops through the result state and renders the return as an array
+  stateLoop() {
+    // console.log('finalState');
+    if (this.state.result) {
+      return this.state.result.map((el, index) => {
+        console.log(el)
+        return <h1 key={index}> {el} </h1>
+      })
+    }
     return false
-      }
+  }
 
   render() {
-        return(
-      <div className= "App" >
-
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <label>
-          talk:
-          <input type="text" value={this.state.text} onChange={(e) => this.handleChange(e)} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-            {this.finalState() }
+    return (
+      <div className="chat-container">
+        <form
+          onSubmit={this.handleSubmit.bind(this)}
+          className="chat-form"
+        >
+          <label className="chat-label">
+            <input
+              type="text"
+              value={this.state.text}
+              onChange={(e) => this.handleChange(e)}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        {this.stateLoop()}
       </div >
     );
   }

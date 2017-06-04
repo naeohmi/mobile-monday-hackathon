@@ -10,6 +10,7 @@ import Navigation from './components/Navigation';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import UserStatus from "./components/UserStatus";
+import NotFound from "./components/NotFound";
 
 export default class App extends Component {
   constructor(props) {
@@ -83,25 +84,26 @@ export default class App extends Component {
   }
 
   checkLogin(authPath) {
-    if(this.state.isLoggedIn === true) {
-      switch(authPath) {
+    if (this.state.isLoggedIn === true) {
+      switch (authPath) {
         case "/chat":
           return this.chatComponent();
         case "/dashboard":
           return this.dashboardComponent();
         default:
+
           return (<Redirect to="/dashboard"/>);
+
       }
     }
-
     else {
-      switch(authPath) {
+      switch (authPath) {
         case "/":
           return this.landingComponent();
         case "/register":
           return this.registerComponent();
         default:
-          return (<Redirect to="/"/>);
+          return (<Redirect to="/" />);
       }
     }
   }
@@ -116,8 +118,11 @@ export default class App extends Component {
 
               <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
               <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
+              <Route path="/*" component={() => (<NotFound />)} />
+
             </Switch>
         </Router>
+
     );
   }
 }
