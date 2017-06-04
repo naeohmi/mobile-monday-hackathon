@@ -12,7 +12,9 @@ import Dashboard from './components/Dashboard';
 import UserStatus from "./components/UserStatus";
 import NotFound from "./components/NotFound";
 
+
 class App extends Component {
+
   constructor(props) {
     super(props);
 
@@ -20,6 +22,7 @@ class App extends Component {
       isLoggedIn: false,
     }
   }
+
 
   userStatusComponent() {
     return (
@@ -42,11 +45,14 @@ class App extends Component {
       <Chat />
     );
   }
+
   dashboardComponent() {
+
     return (
       <Dashboard />
     );
   }
+
   loggingUserName(submittedName, submittedPassword) {
     axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {
       username: submittedName,
@@ -57,6 +63,7 @@ class App extends Component {
       console.log(err);
     });
   }
+
   settingUserName(signupDataArray) {
     axios.post(`http://penpal.mybluemix.net/api/teachers`, {
       username: signupDataArray[0],
@@ -71,6 +78,7 @@ class App extends Component {
       console.log(err);
     });
   }
+
   checkLogin(authPath) {
     if (this.state.isLoggedIn === true) {
       switch (authPath) {
@@ -79,7 +87,7 @@ class App extends Component {
         case "/dashboard":
           return this.dashboardComponent();
         default:
-          return (<Redirect to="/main" />);
+          return (<Redirect to="/dashboard"/>);
       }
     }
     else {
@@ -93,6 +101,7 @@ class App extends Component {
       }
     }
   }
+
   render() {
     return (
       <Router>
