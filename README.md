@@ -48,7 +48,7 @@ Stories:
 17. As a **MEMBER**, I can confirm that I want to sign out
 18. As a **SYSTEM**, I can sign the user out
 
-![yay-kids](./assets/india-kids.jpg)
+![yay-kids](./assets/india-kids.JPG)
 
 ## WIREFRAMES
 
