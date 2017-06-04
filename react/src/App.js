@@ -12,7 +12,9 @@ import Dashboard from './components/Dashboard';
 import UserStatus from "./components/UserStatus";
 import NotFound from "./components/NotFound";
 
-export default class App extends Component {
+
+class App extends Component {
+
   constructor(props) {
     super(props);
 
@@ -21,44 +23,38 @@ export default class App extends Component {
     }
   }
 
-  userStatusComponent = () => {
+
+  userStatusComponent() {
     return (
-      <UserStatus
-        isLoggedIn={this.state.loggedIn}
-      />
+      <UserStatus isLoggedIn={this.state.loggedIn} />
+    );
+  }
+  landingComponent() {
+    return (
+      <Landing logUserName={this.loggingUserName.bind(this)} />
+    );
+  }
+  registerComponent() {
+    return (
+      <Register setUserName={this.settingUserName.bind(this)} />
     );
   }
 
-  landingComponent = () => {
-    return (
-      <Landing
-        logUserName={this.loggingUserName.bind(this)}
-      />
-    );
-  }
-
-  registerComponent = () => {
-    return (
-      <Register
-        setUserName={this.settingUserName.bind(this)}
-      />
-    );
-  }
-
-  chatComponent = () => {
+  chatComponent() {
     return (
       <Chat />
     );
   }
 
-  dashboardComponent = () => {
+  dashboardComponent() {
+
     return (
       <Dashboard />
     );
   }
 
   loggingUserName(submittedName, submittedPassword) {
-    axios.post("http://penpal.mybluemix.net/api/teachers/login", {
+    axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {
       username: submittedName,
       password: submittedPassword
     }).then((res) => {
@@ -69,7 +65,7 @@ export default class App extends Component {
   }
 
   settingUserName(signupDataArray) {
-    axios.post("http://penpal.mybluemix.net/api/teachers", {
+    axios.post(`http://penpal.mybluemix.net/api/teachers`, {
       username: signupDataArray[0],
       email: signupDataArray[1],
       primaryLanguage: signupDataArray[2],
@@ -91,9 +87,7 @@ export default class App extends Component {
         case "/dashboard":
           return this.dashboardComponent();
         default:
-
           return (<Redirect to="/dashboard"/>);
-
       }
     }
     else {
@@ -111,18 +105,24 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-            <Route render={() => this.userStatusComponent()}></Route>
-            <Switch>
-              <Route path="/" exact render={() => this.checkLogin("/")}></Route>
-              <Route path="/register" render={() => this.checkLogin("/register")}></Route>
+      <div className="app-container">
 
-              <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
-              <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
-              <Route path="/*" component={() => (<NotFound />)} />
+        <Navigation />
 
-            </Switch>
-        </Router>
+        {/*<Route render={() => this.userStatusComponent()}></Route>*/}
+        
+        <Switch>
+          <Route path="/" exact render={() => this.checkLogin("/")}></Route>
+          <Route path="/register" render={() => this.checkLogin("/register")}></Route>
 
+          <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
+          <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
+          <Route path="/*" component={() => (<NotFound />)} />
+        
+        </Switch>
+      </div>
+      </Router>
     );
   }
 }
+export default App;
