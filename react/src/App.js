@@ -90,16 +90,16 @@ class App extends Component {
           return (<Redirect to="/dashboard"/>);
       }
     }
-    else {
-      switch (authPath) {
-        case "/":
-          return this.landingComponent();
-        case "/register":
-          return this.registerComponent();
-        default:
-          return (<Redirect to="/" />);
-      }
-    }
+    // else {
+    //   switch (authPath) {
+    //     case "/":
+    //       return this.landingComponent();
+    //     case "/register":
+    //       return this.registerComponent();
+    //     default:
+    //       return (<Redirect to="/" />);
+    //   }
+   // }
   }
 
   render() {
@@ -110,7 +110,7 @@ class App extends Component {
         <Navigation />
 
         {/*<Route render={() => this.userStatusComponent()}></Route>*/}
-        
+
         <Switch>
           <Route path="/" exact render={() => this.checkLogin("/")}></Route>
           <Route path="/register" render={() => this.checkLogin("/register")}></Route>
@@ -118,7 +118,7 @@ class App extends Component {
           <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
           <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
           <Route path="/*" component={() => (<NotFound />)} />
-        
+
         </Switch>
       </div>
       </Router>

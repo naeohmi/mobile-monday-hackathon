@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Config from './config.js';
-import Pubnub from 'pubnub';
-import Translate from './Translate';
+// import Config from './config.js';
+// import Pubnub from 'pubnub';
+// import Translate from './Translate';
 import watson from './watson';
+import PubNub from './PubNub';
 
 class Chat extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class Chat extends Component {
   //when user clicks the submit button - updates the state
   handleSubmit(e) {
     e.preventDefault();
-    //initializes the 
+    //initializes the
     watson.changeText(this.state.input)
       .then(data => {
         let newData = this.state.result;
@@ -38,7 +39,7 @@ class Chat extends Component {
 
         //  console.log(this.state.input)
         this.setState((prevState) => {
-          { result: newData }
+          result: newData
         })
       })
   }
@@ -57,16 +58,18 @@ class Chat extends Component {
   render() {
     return (
       <div className="chat-container">
+
+      <PubNub />
         <form
           onSubmit={this.handleSubmit.bind(this)}
           className="chat-form"
-        >
+          >
           <label className="chat-label">
             <input
               type="text"
               value={this.state.text}
               onChange={(e) => this.handleChange(e)}
-            />
+              />
           </label>
           <input type="submit" value="Submit" />
         </form>
