@@ -5,6 +5,8 @@
 ## IntlPenPals
 IntlPenPals is a web application for global cultural exchange across languages. Classroom teachers register as users and are matched, as digital pen pals, with a classroom across the world; allowing students from different countries to communicate even when they speak different languages.
 
+![yay-kids](./assets/main-kids.jpg)
+
 ## DEFINITIONS
 1. User: Anyone who is accessing the platform
 2. Guest: A user that is not signed in to the platform
@@ -99,3 +101,4 @@ IntlPenPals is a web application for global cultural exchange across languages. 
 - IBM Watson API
 - Cloudinary API
 - Google Maps API
+![fun-kids](./assets/yay.jpg)
