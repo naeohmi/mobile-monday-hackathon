@@ -12,6 +12,9 @@ class Landing extends Component {
 
   render() {
     return (
+
+     <div>
+
       <div className="landing">
           <h3>Welcome to PenPal!</h3>
           <input type="text" placeholder="username" ref="username" className="form-input"/>
@@ -21,8 +24,8 @@ class Landing extends Component {
           <NavLink to="/signup" className="toggle-auth-type">Don't have an account? Sign Up!</NavLink><br/>
           <button type="button" onClick={() => this.checkUserData()} className="submit-btn">Log In</button>
       </div>
+</div>
     );
   }
 }
-
 export default Landing;
