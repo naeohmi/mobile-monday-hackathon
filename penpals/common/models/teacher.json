@@ -18,7 +18,7 @@
       "type": "string",
       "required": true
     },
-    "primary-language": {
+    "primaryLanguage": {
       "type": "string",
       "required": true
     },
@@ -30,7 +30,7 @@
       "type": "string",
       "required": true
     },
-    "student-age": {
+    "studentAge": {
       "type": "number",
       "required": true
     }
