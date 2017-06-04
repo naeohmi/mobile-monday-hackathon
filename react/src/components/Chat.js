@@ -13,15 +13,12 @@ class Chat extends Component {
     this.Pubnub = undefined;
     this.text = undefined;
     this.state = {
-      user: Cookie.load('userId'),
-      userLang: "",
       input: "",
       final: "",
       result: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   componentDidMount(){

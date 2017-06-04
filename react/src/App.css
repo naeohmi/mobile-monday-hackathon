@@ -11,7 +11,7 @@ lightblue: #8EA2A3*/
 
 body {
 	margin: 0 auto;
-
+	/*background: #F2F0EF;*/
         font-family: 'Ubuntu', sans-serif;
 
 }
@@ -19,14 +19,17 @@ body {
 
 .nav-container {
 	height: 80px;
+
         background-color: rgba(142,162,163,0.8);
 }
 
 .logo img {
 	position: absolute;
 	display: inline-block;
+
 	width: 300px;
 	float: left; 
+
 }
 
 .nav {
@@ -55,6 +58,7 @@ body {
 .nav-li a:hover {
 	color: rgba(58,70,93,1);
         font-size: 1.8em;
+
 }
 
 /*RESPONSIVE!*/
@@ -207,5 +211,4 @@ h6 {
         text-transform: uppercase;
         font-size: 40px;
         text-shadow: 1px 1px 1px #000, 3px 3px 5px #738089;
-
 }
