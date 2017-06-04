@@ -63,8 +63,14 @@ IntlPenPals is a web application for global cultural exchange across languages. 
 
 ## WIREFRAMES
 
+![wireframe](./assets/wireframes/Member_Homepage.png)
+![wireframe](./assets/wireframes/Guest_Homepage.png)
+![wireframe](./assets/wireframes/create_account.png)
+![wireframe](./assets/wireframes/Sign_In.png)
+![wireframe](./assets/wireframes/chat_interface.png)
 
-
+## SYSTEM/ USER FLOWS
+![system-flow](./assets/system.png)
 
 ## TECHNOLOGIES USED:
 
