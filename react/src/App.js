@@ -32,15 +32,20 @@ class App extends Component {
     return (
       <UserStatus
         isLoggedIn={this.state.isLoggedIn}
+        token={this.state.token}
+        userLang={this.state.userLang}
+        userId={this.state.userId}
         logout={this.logoutUserName.bind(this)}
       />
     );
   }
+
   landingComponent() {
     return (
       <Landing logUserName={this.loggingUserName.bind(this)} />
     );
   }
+
   registerComponent() {
     return (
       <Register setUserName={this.settingUserName.bind(this)} />
@@ -73,13 +78,10 @@ class App extends Component {
       username: submittedName,
       password: submittedPassword
     }).then((res) => {
-
-      //console.log(res);
       Cookie.save('userToken', res.data.id, { path: '/' });
       Cookie.save('userId', res.data.userId, { path: '/' });
 
       this.setState({ loggedInUser: res.data, isLoggedIn: true });
-      //console.log(this.state.loggedInUser);
     }).catch((err) => {
       console.log(err);
     });
@@ -89,7 +91,8 @@ class App extends Component {
     Cookie.remove('userToken', { path: '/' });
     Cookie.remove('Lang', { path: '/' });
     Cookie.remove('userId', { path: '/' });
-
+    this.setState({ isLoggedIn: false });
+    //console.log("logout clicked");
     axios.post("http://penpal.mybluemix.net/api/teachers/logout?access_token=" + this.state.token)
     .then((res) => {
       console.log(res);
@@ -111,7 +114,7 @@ class App extends Component {
       // WHEN YOU REGISTER SET THESE TWO COOKIES
       Cookie.save('Lang', res.data.primaryLanguage, { path: '/' });
       Cookie.save('userId', res.data.id, { path: '/' })
-      //console.log(res);
+      console.log(res);
       this.setState({ registeredUser: res.data, isLoggedIn: true });
       //console.log(this.state.registeredUser);
     }).catch((err) => {
@@ -184,7 +187,7 @@ class App extends Component {
               <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
               <Route path="/*" component={() => (<NotFound />)} />
             </Switch>
-            <button onClick={()=> this.getLanguage()}>getLang</button>
+            {/*<button onClick={()=> this.getLanguage()}>getLang</button>*/}
           </div>
         </div>
       </Router>

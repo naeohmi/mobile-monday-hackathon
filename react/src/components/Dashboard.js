@@ -8,7 +8,7 @@ export default class Dashboard extends Component {
                     
                 <img src="/images/yay.jpg" alt="kids" />    
 
-                <p>DASHBOARD! IF YOU LOGGED IN YOU'LL SEE THIS PAGE!</p>
+                {/*<p>DASHBOARD! IF YOU LOGGED IN YOU'LL SEE THIS PAGE!</p>*/}
             </div>
         );
     }
