@@ -11,16 +11,17 @@ lightblue: #8EA2A3*/
 
 body {
 	margin: 0 auto;
-	/*background: #F2F0EF;*/
+
         font-family: 'Ubuntu', sans-serif;
 
 }
 /*NAV*/
+/*
 .nav-container {
 	height: 100px;
-        /*width: 100%;*/
-        /*background-color: rgba(255,255,255,0.8);*/
-        background-color: rgba(142,162,163,0.8))
+
+
+        background-color: rgba(142,162,163,0.8);
 }
 
 .logo img {
@@ -57,8 +58,10 @@ body {
 .nav-li a:hover {
 	color: rgba(58,70,93,1);
         font-size: 2.8em;
+}
+*/
 
-/* 
+ 
 .App {
   text-align: center;
 }
@@ -134,7 +137,7 @@ justify-content: space-between;
 
 .content-wrapper button{
   width: 100%;
- */
+}
 /*colors; 
 purpley: #5F555D
 greenish: #6C705F
@@ -257,7 +260,7 @@ h6 {
 	font-weight: normal;
 }
 
-p {
+
 
 .nav-li {
 	display: inline-block;
