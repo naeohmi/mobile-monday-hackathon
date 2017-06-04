@@ -5,6 +5,7 @@ import watson from './watson';
 // import PubNub from './PubNub';
 import Pubnub from 'pubnub';
 import PubJr from './PubJr';
+import Cookie from 'react-cookies';
 
 class Chat extends Component {
   constructor(props) {
@@ -12,13 +13,15 @@ class Chat extends Component {
     this.Pubnub = undefined;
     this.text = undefined;
     this.state = {
+      user: Cookie.load('userId'),
+      userLang: "",
       input: "",
       final: "",
       result: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    //this.finalState = this.finalState.bind(this);
+
   }
 
   componentDidMount(){
@@ -47,9 +50,13 @@ class Chat extends Component {
                       //message is a string of text TODO set as state to render                                                ///////.  listening for messages in the channel
                     message: function(message) {
                         console.log("New Message!!!!!!", message);
-                       self.setState((prevState, props) => {
+
+                        if(message.hasOwnProperty(self.state.userLang)){
+                           self.setState((prevState, props) => {
                           return {result: prevState.result.push(message)};
-                        });
+                          });
+                        }
+
                     },
                     presence: function(presenceEvent) {
                         // handle presence
@@ -59,7 +66,7 @@ class Chat extends Component {
 
                 init()
                 subscribe(this.channelName)
-                listen()
+                listen(this)
 
   }
 
@@ -89,8 +96,12 @@ class Chat extends Component {
   handleSubmit(e) {
     e.preventDefault();
     //initializes the
-    watson.changeText(this.state.input)
+    watson.changeText(this.state.input, this.state.userLang)
       .then(data => {
+        let userObj = {
+          native: this.state.input,
+          foriegn: data.translations[0].translation
+        }
         let newData = this.state.result;
         newData.push(data.translations[0].translation)
         // console.log(newData);
@@ -99,7 +110,8 @@ class Chat extends Component {
         // this.setState((prevState) => {
         //   result: newData
         // })
-        this.publishText(data.translations[0].translation)
+
+        this.publishText(userObj)
       })
   }
 

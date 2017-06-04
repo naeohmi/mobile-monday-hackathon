@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Cookie from 'react-cookies';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ class App extends Component {
       registeredUser: [],
       loggedInUser: [],
       token: "",
+
     }
   }
 
@@ -69,7 +71,10 @@ class App extends Component {
       username: submittedName,
       password: submittedPassword
     }).then((res) => {
-      //console.log(res);
+
+      console.log(res);
+      Cookie.save('userId', res.data.id, { path: '/' })
+
       this.setState({ loggedInUser: res.data, token: res.data.id, isLoggedIn: true });
       //console.log(this.state.loggedInUser);
     }).catch((err) => {
@@ -135,6 +140,7 @@ class App extends Component {
           <div className="app-container">
             <Navigation />
             <Route render={() => this.userStatusComponent()}></Route>
+
             <Switch>
               <Route path="/" exact render={() => this.checkLogin("/")}></Route>
               <Route path="/register" render={() => this.checkLogin("/register")}></Route>
@@ -143,6 +149,7 @@ class App extends Component {
               <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
               <Route path="/*" component={() => (<NotFound />)} />
             </Switch>
+
           </div>
         </div>
       </Router>

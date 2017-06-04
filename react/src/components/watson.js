@@ -9,12 +9,12 @@ export default {
         url: "https://gateway.watsonplatform.net/language-translator/api",
     }),
     //translates the text input
-    changeText: (inputText) => {
+    changeText: (inputText, Nativelang, ForiegnLang) => {
         console.log(this.a);
         let promise = new Promise((resolve) => {
             this.a.watson.translate({
                 text: inputText,
-                source: 'en', //TODO: change from user pref
+                source: Nativelang, //TODO: change from user pref
                 target: 'es' //TODO: need to change this from user data
             },
                 function (err, translation) {
@@ -29,5 +29,17 @@ export default {
             )
         })
         return promise
-    }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
 }
