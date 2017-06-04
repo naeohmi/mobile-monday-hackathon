@@ -20,7 +20,7 @@ body {
 	height: 100px;
         /*width: 100%;*/
         /*background-color: rgba(255,255,255,0.8);*/
-        background-color: rgba(142,162,163,0.8))
+        background-color: rgba(142,162,163,0.8);
 }
 
 .logo img {
@@ -28,7 +28,6 @@ body {
 	display: inline-block;
 	width: 100px;
 	height: 100px;
-	float: left;
 }
 
 .nav {
@@ -57,7 +56,7 @@ body {
 .nav-li a:hover {
 	color: rgba(58,70,93,1);
         font-size: 2.8em;
-
+}
 /* 
 .App {
   text-align: center;
@@ -143,20 +142,19 @@ medblue: #738089
 lightblue: #8EA2A3*/
 
 
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed%7CUbuntu+Mono:400,400i,700,700i%7CUbuntu:300,300i,400,400i,500,500i,700,700i');
+
 
 body {
 	margin: 0 auto;
-	/*background: #F2F0EF;*/
-        font-family: 'Ubuntu', sans-serif;
-
+	font-family: 'Ubuntu', sans-serif;
 }
+
 /*NAV*/
 .nav-container {
 	height: 100px;
         /*width: 100%;*/
         /*background-color: rgba(255,255,255,0.8);*/
-        background-color: rgba(142,162,163,0.8))
+        background-color: rgba(142,162,163,0.8)
 }
 
 .logo img {
@@ -257,12 +255,10 @@ h6 {
 	font-weight: normal;
 }
 
-p {
-
 .nav-li {
 	display: inline-block;
 	padding: 20px 30px;
-        color: rgba(0,0,0,1);
+	color: rgba(0,0,0,1);
 }
 
 .nav-li a {
@@ -274,7 +270,7 @@ p {
 
 .nav-li a:hover {
 	color: rgba(58,70,93,1);
-        font-size: 2.8em;
+	font-size: 2.8em;
 }
 
 

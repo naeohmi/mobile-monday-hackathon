@@ -23,10 +23,8 @@ class App extends Component {
       registeredUser: [],
       loggedInUser: [],
       token: "",
-
     }
   }
-
 
   userStatusComponent() {
     return (
@@ -73,7 +71,7 @@ class App extends Component {
     }).then((res) => {
 
       console.log(res);
-      Cookie.save('userId', res.data.id, { path: '/' })
+      Cookie.save('userToken', res.data.id, { path: '/' })
 
       this.setState({ loggedInUser: res.data, token: res.data.id, isLoggedIn: true });
       //console.log(this.state.loggedInUser);
@@ -83,6 +81,8 @@ class App extends Component {
   }
 
   logoutUserName() {
+    Cookie.remove('userId', { path: '/' });
+
     axios.get("http://penpal.mybluemix.net/api/teachers/logout", {
       access_token: this.state.token
     }).then((res) => {
@@ -102,6 +102,9 @@ class App extends Component {
       timezone: userInfo[5],
       studentAge: userInfo[6]
     }).then((res) => {
+      // WHEN YOU REGISTER SET THESE TWO COOKIES
+      Cookie.save('Lang', res.data.primaryLanguage, { path: '/' });
+      Cookie.save('userId', res.data.id, { path: '/' })
       //console.log(res);
       this.setState({ registeredUser: res.data, isLoggedIn: true });
       //console.log(this.state.registeredUser);
@@ -111,6 +114,10 @@ class App extends Component {
   }
 
   checkLogin(authPath) {
+    // CHECK TO SEE IF COOKIES EXIST
+    let token = Cookie.load('userToken');
+    let userLang = Cookie.load('Lang');
+
     if (this.state.isLoggedIn === true) {
       switch (authPath) {
         case "/chat":
