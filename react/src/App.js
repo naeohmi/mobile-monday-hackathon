@@ -105,15 +105,18 @@ class App extends Component {
   render() {
     return (
       <Router>
+    <div>
       <div className="app-container">
 
         <Navigation />
 
         {/*<Route render={() => this.userStatusComponent()}></Route>*/}
 
+
         <Switch>
           <Route path="/" exact render={() => this.checkLogin("/")}></Route>
           <Route path="/register" render={() => this.checkLogin("/register")}></Route>
+
 
           <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
           <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
@@ -121,6 +124,7 @@ class App extends Component {
 
         </Switch>
       </div>
+          </div>
       </Router>
     );
   }
