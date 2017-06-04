@@ -10,8 +10,11 @@ import Navigation from './components/Navigation';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import UserStatus from "./components/UserStatus";
+import NotFound from "./components/NotFound";
 
-export default class App extends Component {
+
+class App extends Component {
+
   constructor(props) {
     super(props);
 
@@ -23,7 +26,8 @@ export default class App extends Component {
     }
   }
 
-  userStatusComponent = () => {
+
+  userStatusComponent() {
     return (
       <UserStatus
         isLoggedIn={this.state.isLoggedIn}
@@ -31,24 +35,18 @@ export default class App extends Component {
       />
     );
   }
-
-  landingComponent = () => {
+  landingComponent() {
     return (
-      <Landing
-        logUserName={this.loggingUserName.bind(this)}
-      />
+      <Landing logUserName={this.loggingUserName.bind(this)} />
+    );
+  }
+  registerComponent() {
+    return (
+      <Register setUserName={this.settingUserName.bind(this)} />
     );
   }
 
-  registerComponent = () => {
-    return (
-      <Register
-        setUserName={this.settingUserName.bind(this)}
-      />
-    );
-  }
-
-  chatComponent = () => {
+  chatComponent() {
     return (
       <Chat userLoggedIn={this.state.loggedInUser}
             userRegistered={this.state.registeredUser}
@@ -57,7 +55,8 @@ export default class App extends Component {
     );
   }
 
-  dashboardComponent = () => {
+  dashboardComponent() {
+
     return (
       <Dashboard userLoggedIn={this.state.loggedInUser}
                  userRegistered={this.state.registeredUser}
@@ -67,7 +66,7 @@ export default class App extends Component {
   }
 
   loggingUserName(submittedName, submittedPassword) {
-    axios.post("http://penpal.mybluemix.net/api/teachers/login", {
+    axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {
       username: submittedName,
       password: submittedPassword
     }).then((res) => {
@@ -118,7 +117,6 @@ export default class App extends Component {
           return (<Redirect to="/dashboard" />);
       }
     }
-
     else {
       switch (authPath) {
         case "/":
@@ -128,7 +126,7 @@ export default class App extends Component {
         default:
           return (<Redirect to="/" />);
       }
-    }
+   }
   }
 
   render() {
@@ -151,3 +149,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;
