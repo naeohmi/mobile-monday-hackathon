@@ -131,21 +131,30 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Router>
-          <div>
-            <Navigation />
-            <Route render={() => this.userStatusComponent()}></Route>
-            <Switch>
-              <Route path="/" exact render={() => this.checkLogin("/")}></Route>
-              <Route path="/register" render={() => this.checkLogin("/register")}></Route>
 
-              <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
-              <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
-            </Switch>
-          </div>
-        </Router>
+
+      <Router>
+    <div>
+      <div className="app-container">
+
+        <Navigation />
+
+            <Route render={() => this.userStatusComponent()}></Route>
+
+
+        <Switch>
+          <Route path="/" exact render={() => this.checkLogin("/")}></Route>
+          <Route path="/register" render={() => this.checkLogin("/register")}></Route>
+
+
+          <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
+          <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
+          <Route path="/*" component={() => (<NotFound />)} />
+
+        </Switch>
       </div>
+          </div>
+      </Router>
     );
   }
 }

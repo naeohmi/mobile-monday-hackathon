@@ -6,7 +6,7 @@ export default function Navigation(props){
         return (
             <div className="nav-container">
         <div className="logo">
-          <a href="/"><img src="/images/logo.png" alt="Logo" /></a>
+          <a href="/"><img src="../../../assets/logo/penpal_logo_white.png" alt="Logo" /></a>
         </div>
     	  <nav className="nav">
     	     <ul className="nav-ul">
@@ -15,6 +15,7 @@ export default function Navigation(props){
     	       <li className="nav-li"><NavLink to="/dashboard">Dashboard</NavLink></li>
           </ul>
     	  </nav>
+
 	    </div>
         );
     }
