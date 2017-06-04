@@ -101,4 +101,8 @@ IntlPenPals is a web application for global cultural exchange across languages. 
 - IBM Watson API
 - Cloudinary API
 - Google Maps API
+
+### LoopBack API with Cloudant Database: http://penpal.mybluemix.net/
+
+
 ![fun-kids](./assets/yay.jpg)
