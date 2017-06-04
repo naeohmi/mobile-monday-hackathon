@@ -17,6 +17,7 @@ class Chat extends Component {
       user: Cookie.load('userId'),
       userToken: Cookie.load('userToken'),
       userLang: Cookie.load("Lang"),
+      penpalLang: "",
       input: "",
       final: "",
       result: []
@@ -50,12 +51,15 @@ class Chat extends Component {
                     },
                       //message is a string of text TODO set as state to render                                                ///////.  listening for messages in the channel
                     message: function(message) {
-                        console.log("New Message!!!!!!", message.message);
+                        console.log("New Message!!!!!!", message);
                             // message.message.hasOwnProperty(self.state.userLang)
                         // if(message.message["native"] === self.state.userLang){
                         //   console.log("successssssssssss")
+                        let result = message.message.filter((el, index) => {
+                              return el.languageType === self.state.userLang
+                        })
                           let newData = self.state.result;
-                          newData.push(message.message.foriegn_translation)
+                          newData.push(result[0].text)
                            self.setState({result: newData})
 
 
@@ -116,27 +120,37 @@ class Chat extends Component {
     let self = this
     this.checkName().then(data => {
 
-      let r = data
-      let foreign = data === "en" ? "es" : "en";
-      console.log("data", data, "foreinnnn", foreign)
-       watson.changeText(self.state.input, data, foreign)
+        let r = data
+        let foreign = data === "en" ? "es" : "en";
+        console.log("data", data, "foreinnnn", foreign)
+        watson
+        .changeText(self.state.input, data, foreign)
         .then(data => {
-        let userObj = {
-          native: self.state.userLang,
-          foriegn_translation: data.translations[0].translation
-        }
-        // let newData = this.state.result;
-        console.log(self.state.result)
-        console.log("yo foreign result.  +.  data", foreign, r)
-        // newData.push(data.translations[0].translation)
-        // console.log(newData);
+          let userObj = [
+            {
+              languageType: self.state.userLang,
+              text: self.state.input
+            },
+            {
+              languageType: self.state.penpalLang,
+              text: data.translations[0].translation
+            }
+            // foriegn_translation: data.translations[0].translation,
+            // originalLang: self.state.input
+          ]
 
-        //  console.log(this.state.input)
-        // this.setState((prevState) => {
-        //   result: newData
-        // })
+          // let newData = this.state.result;
+          console.log(self.state.result)
+          console.log("yo foreign result.  +.  data", foreign, r)
+          // newData.push(data.translations[0].translation)
+          // console.log(newData);
 
-        self.publishText(userObj)
+          //  console.log(this.state.input)
+          // this.setState((prevState) => {
+          //   result: newData
+          // })
+
+          self.publishText(userObj)
       })
 
     })
