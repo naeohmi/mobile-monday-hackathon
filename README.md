@@ -5,7 +5,7 @@
 ## IntlPenPals
 IntlPenPals is a web application for global cultural exchange across languages. Classroom teachers register as users and are matched, as digital pen pals, with a classroom across the world; allowing students from different countries to communicate even when they speak different languages.
 
-![team](./assets/team.jpg)
+![yay-kids](./assets/main-kids.jpg)
 
 ## USER STORIES
 Definitions: 
@@ -48,7 +48,7 @@ Stories:
 17. As a **MEMBER**, I can confirm that I want to sign out
 18. As a **SYSTEM**, I can sign the user out
 
-![yay-kids](./assets/main-kids.jpg)
+
 
 ## WIREFRAMES
 ![wireframe](./assets/wireframes/create_account.png)
