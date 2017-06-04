@@ -1,3 +1,63 @@
+
+/*colors; 
+purpley: #5F555D
+greenish: #6C705F
+darkblue: #3A465D
+medblue: #738089
+lightblue: #8EA2A3*/
+
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed%7CUbuntu+Mono:400,400i,700,700i%7CUbuntu:300,300i,400,400i,500,500i,700,700i');
+
+body {
+	margin: 0 auto;
+	/*background: #F2F0EF;*/
+        font-family: 'Ubuntu', sans-serif;
+
+}
+/*NAV*/
+.nav-container {
+	height: 100px;
+        /*width: 100%;*/
+        /*background-color: rgba(255,255,255,0.8);*/
+        background-color: rgba(142,162,163,0.8))
+}
+
+.logo img {
+	position: absolute;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+
+.nav {
+	display: inline-block;
+	width: 100%;
+}
+
+.nav-ul {
+	list-style: none;
+	float: right;
+}
+
+.nav-li {
+	display: inline-block;
+	padding: 20px 30px;
+        color: rgba(0,0,0,1);
+}
+
+.nav-li a {
+	color: rgba(115,128,137,0.8);
+	font-size: 2.5em;
+	text-decoration: none;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.nav-li a:hover {
+	color: rgba(58,70,93,1);
+        font-size: 2.8em;
+
 /* 
 .App {
   text-align: center;
@@ -110,12 +170,94 @@ body {
 .nav {
 	display: inline-block;
 	width: 100%;
+
 }
 
 .nav-ul {
 	list-style: none;
 	float: right;
 }
+
+/*RESPONSIVE!*/
+
+@media only screen and (max-width: 667px) {
+	h1 {
+	font-size: 28px;
+        
+	}
+	h2 {
+	font-size: 26px;
+	}
+	h3 {
+	font-size: 24px;
+	}
+	h4 {
+	font-size: 18px;	
+	}
+	h6 {
+	font-size: 18px;
+	}
+	p {
+	font-size: 16px;
+	}
+	.nav-container {
+	height: auto;
+	display: block;
+	}
+	.logo img {
+	float: none;
+	display: block;
+	position: relative;
+	padding: 0 38%;
+	}
+	.nav {
+	display: block;	
+	}
+	.nav-ul {
+	text-align: center;
+	list-style: none;
+	float: none;
+	padding: 0px;
+	}
+	ul > li {
+	display: block;
+	padding: 10px 20px;
+	}
+}
+
+h1 {
+	font-size: 40px;
+	/*font-family: 'Ubuntu', sans-serif;*/
+	/*color: #003B5E;*/
+	text-shadow: 1px 1px 1px #000, 3px 3px 5px #738089;
+	text-transform: uppercase;
+        color: rgba(58,70,93,1);
+}
+
+h2 {
+	font-size: 30px;
+	text-align: center;
+	color: #5F555D;
+}
+
+h3 {
+	font-size: 30px;
+	margin: 10px 0;
+	color: #003B5E;
+}
+
+h4 {
+	font-size: 30px;
+}
+
+h6 {
+	margin: 0;
+	padding: 0 0 0 20px;
+	font-size: 15px;
+	font-weight: normal;
+}
+
+p {
 
 .nav-li {
 	display: inline-block;
@@ -204,8 +346,14 @@ h3 {
 	color: #003B5E;
 }
 
+
 h4 {
 	font-size: 30px;
+}
+
+
+a {
+	color: #0880C6;
 }
 
 h6 {
