@@ -17,8 +17,8 @@ export default class Landing extends Component {
           <h3>Welcome to PenPal!</h3>
           <input type="text" placeholder="username" ref="username"/>
           <input type="password" placeholder="password" ref="password"/>      
-          <NavLink to="/signup">Don't have an account? Sign Up!</NavLink><br/>
-          <button type="button" onClick={() => this.checkUserData()}>Log In</button>
+          <NavLink to="/register">Don't have an account? Sign Up!</NavLink><br/>
+          <button type="button" onClick={() => this.checkUserData()}>Login</button>
         </div>
       </div>
     );

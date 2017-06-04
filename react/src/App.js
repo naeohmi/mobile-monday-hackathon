@@ -91,7 +91,9 @@ export default class App extends Component {
         case "/dashboard":
           return this.dashboardComponent();
         default:
-          return (<Redirect to="/main" />);
+
+          return (<Redirect to="/dashboard"/>);
+
       }
     }
     else {
@@ -105,19 +107,22 @@ export default class App extends Component {
       }
     }
   }
+
   render() {
     return (
       <Router>
-        {/*<Route render={() => this.userStatusComponent()}></Route>*/}
-        <Switch>
-          <Route path="/" exact render={() => this.checkLogin("/")}></Route>
-          <Route path="/register" render={() => this.checkLogin("/register")}></Route>
+            <Route render={() => this.userStatusComponent()}></Route>
+            <Switch>
+              <Route path="/" exact render={() => this.checkLogin("/")}></Route>
+              <Route path="/register" render={() => this.checkLogin("/register")}></Route>
 
-          <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
-          <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
-          <Route path="/*" component={() => (<NotFound />)} />
-        </Switch>
-      </Router>
+              <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
+              <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
+              <Route path="/*" component={() => (<NotFound />)} />
+
+            </Switch>
+        </Router>
+
     );
   }
 }

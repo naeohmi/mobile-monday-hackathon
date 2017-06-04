@@ -9,7 +9,8 @@ export default class Register extends Component {
             this.refs.email.value,
             this.refs.password.value,
             this.refs.city.value,
-            this.refs.student_age.value
+            this.refs.primaryLanguage.value,
+            this.refs.studentAge.value
         ]);
     }
 
@@ -26,12 +27,12 @@ export default class Register extends Component {
                     <p>city</p>
                     <p><input type="text" ref="city" required /></p>
                     <p>primary language</p>
-                    <p><select ref="language">
+                    <p><select ref="primaryLanguage">
                         <option value="en">English</option>
                         <option value="es">Spanish</option>
                     </select></p>
                     <p>student age</p>
-                    <p><input type="number" ref="student_age" required /></p>
+                    <p><input type="number" ref="studentAge" required /></p>
                     <p><NavLink to="/">Already have an account? Login!</NavLink></p>
                     <button onClick={() => this.newUserData()}>Create Account</button>
                 </div>
