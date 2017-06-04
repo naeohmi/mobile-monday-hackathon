@@ -1,7 +1,11 @@
 # Mobile Monday Hackathon
 
+![app-logo](./assets/logo/penpal_logo_dark_large.png)
+
 ## IntlPenPals
 IntlPenPals is a web application for global cultural exchange across languages. Classroom teachers register as users and are matched, as digital pen pals, with a classroom across the world; allowing students from different countries to communicate even when they speak different languages.
+
+![yay-kids](./assets/main-kids.jpg)
 
 ## DEFINITIONS
 1. User: Anyone who is accessing the platform
@@ -60,3 +64,41 @@ IntlPenPals is a web application for global cultural exchange across languages. 
 
 
 ## WIREFRAMES
+
+![wireframe](./assets/wireframes/Member_Homepage.png)
+![wireframe](./assets/wireframes/Guest_Homepage.png)
+![wireframe](./assets/wireframes/create_account.png)
+![wireframe](./assets/wireframes/Sign_In.png)
+![wireframe](./assets/wireframes/chat_interface.png)
+
+## SYSTEM/ USER FLOWS
+![system-flow](./assets/system.png)
+
+## TECHNOLOGIES USED:
+
+### Core Stack:
+
+- React
+- Node
+- Loopback
+- HTML
+- CSS
+- JavaScript
+- Heroku
+- Git
+- Pubnub
+
+### Middleware:
+
+- Axios
+- React-router-dom
+- Cors
+- CSS Frameworks
+
+### APIs:
+
+- LoopBack API
+- IBM Watson API
+- Cloudinary API
+- Google Maps API
+![fun-kids](./assets/yay.jpg)
