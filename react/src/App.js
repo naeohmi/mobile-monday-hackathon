@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: true,
     }
   }
 
@@ -99,7 +99,7 @@ class App extends Component {
         default:
           return (<Redirect to="/" />);
       }
-    }
+   }
   }
 
   render() {
@@ -110,7 +110,7 @@ class App extends Component {
         <Navigation />
 
         {/*<Route render={() => this.userStatusComponent()}></Route>*/}
-        
+
         <Switch>
           <Route path="/" exact render={() => this.checkLogin("/")}></Route>
           <Route path="/register" render={() => this.checkLogin("/register")}></Route>
@@ -118,7 +118,7 @@ class App extends Component {
           <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
           <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
           <Route path="/*" component={() => (<NotFound />)} />
-        
+
         </Switch>
       </div>
       </Router>
