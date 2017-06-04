@@ -21,7 +21,7 @@ class Chat extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.finalState = this.finalState.bind(this);
+    // this.finalState = this.finalState.bind(this);
   }
 
   componentDidMount(){
@@ -96,7 +96,7 @@ class Chat extends Component {
   handleSubmit(e) {
     e.preventDefault();
     //initializes the
-    watson.changeText(this.state.input, this.user.primaryLanguage)
+    watson.changeText(this.state.input, this.state.userLang)
       .then(data => {
         let userObj = {
           native: this.state.input,

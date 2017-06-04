@@ -74,7 +74,7 @@ class App extends Component {
       password: submittedPassword
     }).then((res) => {
       console.log(res);
-      Cookie.save('userId', res.data, { path: '/' })
+      Cookie.save('userId', res.data.id, { path: '/' })
       this.setState({ loggedInUser: res.data, token: res.data.id, isLoggedIn: true });
       //console.log(this.state.loggedInUser);
     }).catch((err) => {
