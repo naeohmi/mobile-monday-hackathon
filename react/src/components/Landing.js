@@ -12,12 +12,13 @@ export default class Landing extends Component {
 
   render() {
     return (
-      <div>
-        <div> 
+      <div className="main-content-wrapper">
+
+        <div className="content-wrapper">
           <h3>Welcome to PenPal!</h3>
           <input type="text" placeholder="username" ref="username"/>
-          <input type="password" placeholder="password" ref="password"/>      
-          <NavLink to="/register">Don't have an account? Sign Up!</NavLink><br/>
+          <input type="password" placeholder="password" ref="password"/>
+          <NavLink to="/register">Don't have an account? Sign Up!</NavLink>
           <button type="button" onClick={() => this.checkUserData()}>Login</button>
         </div>
       </div>

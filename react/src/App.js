@@ -111,7 +111,10 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-            <Route render={() => this.userStatusComponent()}></Route>
+<div>
+        <div className="wrapper">
+        <Navigation/>
+
             <Switch>
               <Route path="/" exact render={() => this.checkLogin("/")}></Route>
               <Route path="/register" render={() => this.checkLogin("/register")}></Route>
@@ -121,8 +124,9 @@ export default class App extends Component {
               <Route path="/*" component={() => (<NotFound />)} />
 
             </Switch>
+            </div>
+                    </div>
         </Router>
-
     );
   }
 }
