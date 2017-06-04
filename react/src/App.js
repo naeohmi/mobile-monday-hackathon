@@ -90,7 +90,7 @@ export default class App extends Component {
         case "/dashboard":
           return this.dashboardComponent();
         default:
-          return (<Redirect to="/main"/>);
+          return (<Redirect to="/dashboard"/>);
       }
     }
 
@@ -106,11 +106,10 @@ export default class App extends Component {
     }
   }
 
-
   render() {
     return (
       <Router>
-            {/*<Route render={() => this.userStatusComponent()}></Route>*/}
+            <Route render={() => this.userStatusComponent()}></Route>
             <Switch>
               <Route path="/" exact render={() => this.checkLogin("/")}></Route>
               <Route path="/register" render={() => this.checkLogin("/register")}></Route>
