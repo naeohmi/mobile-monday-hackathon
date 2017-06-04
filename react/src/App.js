@@ -12,7 +12,6 @@ import Dashboard from './components/Dashboard';
 import UserStatus from "./components/UserStatus";
 import NotFound from "./components/NotFound";
 
-
 class App extends Component {
 
   constructor(props) {
@@ -49,9 +48,9 @@ class App extends Component {
   chatComponent() {
     return (
       <Chat userLoggedIn={this.state.loggedInUser}
-            userRegistered={this.state.registeredUser}
-            isLoggedIn={this.state.isLoggedIn}
-            token={this.state.token} />
+        userRegistered={this.state.registeredUser}
+        isLoggedIn={this.state.isLoggedIn}
+        token={this.state.token} />
     );
   }
 
@@ -59,9 +58,9 @@ class App extends Component {
 
     return (
       <Dashboard userLoggedIn={this.state.loggedInUser}
-                 userRegistered={this.state.registeredUser}
-                 isLoggedIn={this.state.isLoggedIn}
-                 token={this.state.token} />
+        userRegistered={this.state.registeredUser}
+        isLoggedIn={this.state.isLoggedIn}
+        token={this.state.token} />
     );
   }
 
@@ -70,7 +69,7 @@ class App extends Component {
       username: submittedName,
       password: submittedPassword
     }).then((res) => {
-      console.log(res);
+      //console.log(res);
       this.setState({ loggedInUser: res.data, token: res.data.id, isLoggedIn: true });
       //console.log(this.state.loggedInUser);
     }).catch((err) => {
@@ -82,10 +81,10 @@ class App extends Component {
     axios.get("http://penpal.mybluemix.net/api/teachers/logout", {
       access_token: this.state.token
     }).then((res) => {
-        console.log(res);
-      }).catch(function (err) {
-        console.log(err);
-      });
+      console.log(res);
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
 
   settingUserName(userInfo) {
@@ -98,7 +97,7 @@ class App extends Component {
       timezone: userInfo[5],
       studentAge: userInfo[6]
     }).then((res) => {
-      console.log(res);
+      //console.log(res);
       this.setState({ registeredUser: res.data, isLoggedIn: true });
       //console.log(this.state.registeredUser);
     }).catch((err) => {
@@ -126,34 +125,26 @@ class App extends Component {
         default:
           return (<Redirect to="/" />);
       }
-   }
+    }
   }
 
   render() {
     return (
-
-
       <Router>
-    <div>
-      <div className="app-container">
-
-        <Navigation />
-
+        <div>
+          <div className="app-container">
+            <Navigation />
             <Route render={() => this.userStatusComponent()}></Route>
+            <Switch>
+              <Route path="/" exact render={() => this.checkLogin("/")}></Route>
+              <Route path="/register" render={() => this.checkLogin("/register")}></Route>
 
-
-        <Switch>
-          <Route path="/" exact render={() => this.checkLogin("/")}></Route>
-          <Route path="/register" render={() => this.checkLogin("/register")}></Route>
-
-
-          <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
-          <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
-          <Route path="/*" component={() => (<NotFound />)} />
-
-        </Switch>
-      </div>
+              <Route path="/chat" render={() => this.checkLogin("/chat")}></Route>
+              <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
+              <Route path="/*" component={() => (<NotFound />)} />
+            </Switch>
           </div>
+        </div>
       </Router>
     );
   }
