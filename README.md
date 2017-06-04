@@ -51,7 +51,7 @@ Stories:
 
 
 ## WIREFRAMES
-![wireframe](./assets/wireframes/create_account.png)
+
 ![wireframe](./assets/wireframes/Sign_In.png)
 ![wireframe](./assets/wireframes/chat_interface.png)
 
@@ -86,7 +86,7 @@ Stories:
 - Cloudinary API
 - Google Maps API
 
-### LoopBack API with Cloudant Database: http://penpal.mybluemix.net/
+### LoopBack API with Cloudant Database: http://penpal.mybluemix.net/explorer/#!/teacher/
 
 
 ![fun-kids](./assets/yay.jpg)
