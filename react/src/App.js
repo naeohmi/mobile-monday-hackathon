@@ -12,7 +12,6 @@ import Dashboard from './components/Dashboard';
 import UserStatus from "./components/UserStatus";
 import NotFound from "./components/NotFound";
 
-
 class App extends Component {
 
   constructor(props) {
