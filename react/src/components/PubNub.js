@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Config from './config';
 import Pubnub from 'pubnub';
+import PubJR from './PubJr';
 
 class PubNub extends Component {
 
@@ -11,6 +12,7 @@ class PubNub extends Component {
             this.state = {
               //leave blank for now
               pubjObj: {},
+              myArray: [],
               message: ""
             }
             this.toChat = this.toChat.bind(this);
@@ -24,59 +26,60 @@ class PubNub extends Component {
 
       //       channelName: "",
 
-              init(){
-              this.Pub =  new Pubnub(Config)
-              console.log(this.Pub)
-              }
+              // init(){
+              // this.Pub =  new Pubnub(Config)
+              // console.log(this.Pub)
+              // }
 
-              publishText(message) {
-                    console.log("inside the publish function!!");
-                    let self = this;
+              // publishText(message) {
+              //       console.log("inside the publish function!!");
+              //       let self = this;
 
-                    var publishConfig = {
-                        channel : self.channelName,
-                        message : message                ////////array of translations
-                    }
-                    this.Pub.publish(publishConfig, function(status, response) {
-                        console.log(status, response, "finished publishing");
-                    })
-              }
+              //       var publishConfig = {
+              //           channel : self.channelName,
+              //           message : message                ////////array of translations
+              //       }
+              //       this.Pub.publish(publishConfig, function(status, response) {
+              //           console.log(status, response, "finished publishing");
+              //       })
+              // }
 
-              subscribe(channelName){
-                 this.Pub.subscribe({
-                    channels: [channelName]
-                });
-                 this.channelName = channelName;
-                 console.log("subscribed")
-              }
+              // subscribe(channelName){
+              //    this.Pub.subscribe({
+              //       channels: [channelName]
+              //   });
+              //    this.channelName = channelName;
+              //    console.log("subscribed")
+              // }
 
-              listen(){
-                this.Pub.addListener({
-                    status: function(statusEvent) {
-                        if (statusEvent.category === "PNConnectedCategory") {
-                            // publishSampleMessage();
+              // listen(){
+              //   this.Pub.addListener({
+              //       status: function(statusEvent) {
+              //           if (statusEvent.category === "PNConnectedCategory") {
+              //               // publishSampleMessage();
 
-                        }
-                    },
-                      //message is a string of text TODO set as state to render                                                ///////.  listening for messages in the channel
-                    message: function(message) {
-                        console.log("New Message!!!!!!", message);
-                        this.setState({
-                          message
-                        })
-                    },
-                    presence: function(presenceEvent) {
-                        // handle presence
-                    }
-                })
-              }
+              //           }
+              //       },
+              //         //message is a string of text TODO set as state to render                                                ///////.  listening for messages in the channel
+              //       message: function(message) {
+              //           console.log("New Message!!!!!!", message);
+              //           this.setState({
+              //             myArray: myArray.push(message)
+              //           })
+              //       },
+              //       presence: function(presenceEvent) {
+              //           // handle presence
+              //       }
+              //   })
+              // }
 
 
 
           render() {
+            console.log()
             return (
               <div className="pubnub">
-
+                  <PubJR chatText={this.props.chatArray}/>
               </div>
               )
           };

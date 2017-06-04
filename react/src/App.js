@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: true,
     }
   }
 
@@ -90,16 +90,16 @@ class App extends Component {
           return (<Redirect to="/dashboard"/>);
       }
     }
-    // else {
-    //   switch (authPath) {
-    //     case "/":
-    //       return this.landingComponent();
-    //     case "/register":
-    //       return this.registerComponent();
-    //     default:
-    //       return (<Redirect to="/" />);
-    //   }
-   // }
+    else {
+      switch (authPath) {
+        case "/":
+          return this.landingComponent();
+        case "/register":
+          return this.registerComponent();
+        default:
+          return (<Redirect to="/" />);
+      }
+   }
   }
 
   render() {
