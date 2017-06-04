@@ -48,19 +48,10 @@ class Translate extends Component {
         }
     }
 
-    callWatson() {
-
-    }
-
-    // translateText() {
-    //   this.setState.langTranslator = new WatsonTranslate({
-
-    //   })
-
     render() {
 
         return (
-            <div>
+            <div className="translate-container">
                 <h1 className="lang">{this.state.lang}</h1>
                 <p className="translated-txt">{this.state.txtTranslated}</p>
             </div>
