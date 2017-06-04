@@ -19,14 +19,20 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: false,
+      registeredUser: [],
+      loggedInUser: [],
+      token: "",
     }
   }
 
 
   userStatusComponent() {
     return (
-      <UserStatus isLoggedIn={this.state.loggedIn} />
+      <UserStatus
+        isLoggedIn={this.state.isLoggedIn}
+        logout={this.logoutUserName.bind(this)}
+      />
     );
   }
   landingComponent() {
@@ -42,14 +48,20 @@ class App extends Component {
 
   chatComponent() {
     return (
-      <Chat />
+      <Chat userLoggedIn={this.state.loggedInUser}
+            userRegistered={this.state.registeredUser}
+            isLoggedIn={this.state.isLoggedIn}
+            token={this.state.token} />
     );
   }
 
   dashboardComponent() {
 
     return (
-      <Dashboard />
+      <Dashboard userLoggedIn={this.state.loggedInUser}
+                 userRegistered={this.state.registeredUser}
+                 isLoggedIn={this.state.isLoggedIn}
+                 token={this.state.token} />
     );
   }
 
@@ -59,21 +71,36 @@ class App extends Component {
       password: submittedPassword
     }).then((res) => {
       console.log(res);
+      this.setState({ loggedInUser: res.data, token: res.data.id, isLoggedIn: true });
+      //console.log(this.state.loggedInUser);
     }).catch((err) => {
       console.log(err);
     });
   }
 
-  settingUserName(signupDataArray) {
-    axios.post(`http://penpal.mybluemix.net/api/teachers`, {
-      username: signupDataArray[0],
-      email: signupDataArray[1],
-      primaryLanguage: signupDataArray[2],
-      password: signupDataArray[3],
-      timezone: signupDataArray[4],
-      studentAge: signupDataArray[5]
+  logoutUserName() {
+    axios.get("http://penpal.mybluemix.net/api/teachers/logout", {
+      access_token: this.state.token
+    }).then((res) => {
+        console.log(res);
+      }).catch(function (err) {
+        console.log(err);
+      });
+  }
+
+  settingUserName(userInfo) {
+    axios.post("http://penpal.mybluemix.net/api/teachers", {
+      username: userInfo[0],
+      email: userInfo[1],
+      city: userInfo[2],
+      primaryLanguage: userInfo[3],
+      password: userInfo[4],
+      timezone: userInfo[5],
+      studentAge: userInfo[6]
     }).then((res) => {
       console.log(res);
+      this.setState({ registeredUser: res.data, isLoggedIn: true });
+      //console.log(this.state.registeredUser);
     }).catch((err) => {
       console.log(err);
     });
@@ -87,7 +114,7 @@ class App extends Component {
         case "/dashboard":
           return this.dashboardComponent();
         default:
-          return (<Redirect to="/dashboard"/>);
+          return (<Redirect to="/dashboard" />);
       }
     }
     else {
@@ -104,13 +131,15 @@ class App extends Component {
 
   render() {
     return (
+
+
       <Router>
     <div>
       <div className="app-container">
 
         <Navigation />
 
-        {/*<Route render={() => this.userStatusComponent()}></Route>*/}
+            <Route render={() => this.userStatusComponent()}></Route>
 
 
         <Switch>
@@ -129,4 +158,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;

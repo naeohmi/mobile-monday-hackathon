@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { BrowserRouter as Route, NavLink, Link } from 'react-router-dom';
 
-class Navigation extends Component {
-  render() {
-    return (
-      <div className="nav-container">
+export default function Navigation(props){
+    const renderNavigation = () => {
+        return (
+            <div className="nav-container">
         <div className="logo">
           <a href="/"><img src="../../../assets/logo/penpal_logo_white.png" alt="Logo" /></a>
         </div>
@@ -17,8 +17,12 @@ class Navigation extends Component {
     	  </nav>
 
 	    </div>
-    );
-  }
-}
+        );
+    }
 
-export default Navigation;
+    return (
+        <div>
+            {renderNavigation()}
+        </div>
+    );
+}
