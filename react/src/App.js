@@ -82,11 +82,27 @@ class App extends Component {
       console.log(res);
       Cookie.save('userToken', res.data.id, { path: '/' })
       Cookie.save('userId', res.data.userId, { path: '/' })
-      this.setState({ loggedInUser: res.data, token: res.data.id, userID: res.data.userId, isLoggedIn: true });
+      return res
       //console.log(this.state.loggedInUser);
+    }).then((res) => {
+        let myRes = res
+    /// `http://penpal.mybluemix.net/api/teachers?access_token=${this.state.token}`
+    let y = `http://penpal.mybluemix.net/api/teachers/${Cookie.load('userId')}?access_token=${Cookie.load('userToken')}`
+   axios.get(y)
+   .then((result) => {
+        console.log("loggingUSerNAme function!!! the 2nd then ", result, myRes);
+        Cookie.save('userLang', result.data.primaryLanguage, { path: '/' })
+        this.setState({ loggedInUser: myRes.data, token: myRes.data.id, userID: myRes.data.userId, isLoggedIn: true,  userLang: result.data.primaryLanguage });
+         return  res.data.primaryLanguage
+      }).catch(function (err) {
+        console.log(err);
+      });
+
     }).catch((err) => {
       console.log(err);
     });
+
+
   }
 
   logoutUserName() {

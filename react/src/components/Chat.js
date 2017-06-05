@@ -53,11 +53,12 @@ class Chat extends Component {
                     message: function(message) {
                         console.log("New Message!!!!!!", message);
                             // message.message.hasOwnProperty(self.state.userLang)
-                        // if(message.message["native"] === self.state.userLang){
-                        //   console.log("successssssssssss")
+
+                        let c = Cookie.load("userLang")
                         let result = message.message.filter((el, index) => {
-                              return el.languageType === self.state.userLang
+                              return el.languageType === c
                         })
+                        console.log(result)
                           let newData = self.state.result;
                           newData.push(result[0].text)
                            self.setState({result: newData})
@@ -117,43 +118,35 @@ class Chat extends Component {
     e.preventDefault();
     //initializes the
 
-    let self = this
-    this.checkName().then(data => {
-
-        let r = data
-        let foreign = data === "en" ? "es" : "en";
-        console.log("data", data, "foreinnnn", foreign)
+        let self = this
+        let original = Cookie.load("userLang")
+        let foreign = original === "en" ? "es" : "en";
+        // console.log("data", data, "foreinnnn", foreign)
         watson
-        .changeText(self.state.input, data, foreign)
+        .changeText(self.state.input, original, foreign)
         .then(data => {
           let userObj = [
             {
-              languageType: self.state.userLang,
+              languageType: original,
               text: self.state.input
             },
             {
-              languageType: self.state.penpalLang,
+              languageType: foreign,
               text: data.translations[0].translation
             }
-            // foriegn_translation: data.translations[0].translation,
-            // originalLang: self.state.input
+
           ]
 
           // let newData = this.state.result;
           console.log(self.state.result)
-          console.log("yo foreign result.  +.  data", foreign, r)
+          console.log("yo foreign result.>>> ", foreign)
+          console.log("yo the r >>> userLang", original)
+          console.log(userObj)
           // newData.push(data.translations[0].translation)
           // console.log(newData);
 
-          //  console.log(this.state.input)
-          // this.setState((prevState) => {
-          //   result: newData
-          // })
-
           self.publishText(userObj)
       })
-
-    })
 
 
   }
