@@ -114,41 +114,64 @@ class Chat extends Component {
     })
   }
   //when user clicks the submit button - updates the state
-  handleSubmit(e) {
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   //initializes the
+
+  //       let self = this
+  //       let original = Cookie.load("userLang")
+  //       let foreign = original === "en" ? "es" : "en";
+  //       // console.log("data", data, "foreinnnn", foreign)
+  //       watson
+  //       .changeText(self.state.input, original, foreign)
+  //       .then(data => {
+  //         let userObj = [
+  //           {
+  //             languageType: original,
+  //             text: self.state.input
+  //           },
+  //           {
+  //             languageType: foreign,
+  //             text: data.translations[0].translation
+  //           }
+
+  //         ]
+
+  //         // let newData = this.state.result;
+  //         console.log(self.state.result)
+  //         console.log("yo foreign result.>>> ", foreign)
+  //         console.log("yo the r >>> userLang", original)
+  //         console.log(userObj)
+  //         // newData.push(data.translations[0].translation)
+  //         // console.log(newData);
+
+  //         self.publishText(userObj)
+  //     })
+  // }
+
+   handleSubmit(e) {          ////////  es7 async function   /////   the await is the promise
+    let self = this
     e.preventDefault();
-    //initializes the
+      async function go(){
+         let original = Cookie.load("userLang")
+         let foreign = original === "en" ? "es" : "en";
+        try {
 
-        let self = this
-        let original = Cookie.load("userLang")
-        let foreign = original === "en" ? "es" : "en";
-        // console.log("data", data, "foreinnnn", foreign)
-        watson
-        .changeText(self.state.input, original, foreign)
-        .then(data => {
-          let userObj = [
-            {
-              languageType: original,
-              text: self.state.input
-            },
-            {
-              languageType: foreign,
-              text: data.translations[0].translation
-            }
-
-          ]
-
-          // let newData = this.state.result;
-          console.log(self.state.result)
-          console.log("yo foreign result.>>> ", foreign)
-          console.log("yo the r >>> userLang", original)
-          console.log(userObj)
-          // newData.push(data.translations[0].translation)
-          // console.log(newData);
-
-          self.publishText(userObj)
-      })
-
-
+            let result1 = await watson.changeText(self.state.input, original, foreign)
+            let userObj = [
+                  {
+                    languageType: original,
+                    text: self.state.input
+                  },
+                  {
+                    languageType: foreign,
+                    text: result1.translations[0].translation
+                  }
+                ]
+            self.publishText(userObj)
+          } catch(err) { console.log(err)}
+      }
+    go()
   }
 
 
