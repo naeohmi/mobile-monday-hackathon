@@ -13,22 +13,22 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <div className="landing">
-          
-          <div className="text-cont">
-          <h3 className="landing-header">Welcome to intlpenpals!</h3>
-          
-            <input type="text" placeholder="username" ref="username" className="form-input" />
-            <input type="password" placeholder="password" ref="password" className="form-input" />
+
+      <div className="landing">
+       <div className="text-cont">
+          <h3>Welcome to PenPal!</h3>
+          <input type="text" placeholder="username" ref="username" className="form-input"/>
+          <input type="password" placeholder="password" ref="password" className="form-input"/>
 
             <br />
             <NavLink to="/register" className="toggle-auth-type">Click to Sign Up!</NavLink><br />
             <button type="button" onClick={() => this.checkUserData()} className="submit-btn">Log In</button>
-          </div>
+        </div>
         </div>
         <div className="img-cont">
             <img src="/images/main-kids.jpg" alt="kids" />
           </div>
+
       </div>
     );
   }

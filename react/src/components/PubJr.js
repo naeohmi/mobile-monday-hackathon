@@ -9,9 +9,14 @@ import React, { Component } from 'react';
 
 
   render(){
+    let st = {
+    width: "50%",
+    fontSize: "20px",
+    margin: "10px"
+    }
     if(this.props.chatText){
          return(
-             <div>{`Hi ${this.props.chatText}`}</div>
+             <div className="message" style={st}>{`${this.props.Lang}: ${this.props.chatText}`}</div>
           )
     }else {
         return(
