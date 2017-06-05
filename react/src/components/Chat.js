@@ -150,28 +150,28 @@ class Chat extends Component {
   // }
 
    handleSubmit(e) {          ////////  es7 async function   /////   the await is the promise
-    let self = this
-    e.preventDefault();
-      async function go(){
-         let original = Cookie.load("userLang")
-         let foreign = original === "en" ? "es" : "en";
-        try {
+      let self = this
+      e.preventDefault();
+        async function go(){
+           let original = Cookie.load("userLang")
+           let foreign = original === "en" ? "es" : "en";
+          try {
 
-            let result1 = await watson.changeText(self.state.input, original, foreign)
-            let userObj = [
-                  {
-                    languageType: original,
-                    text: self.state.input
-                  },
-                  {
-                    languageType: foreign,
-                    text: result1.translations[0].translation
-                  }
-                ]
-            self.publishText(userObj)
-          } catch(err) { console.log(err)}
-      }
-    go()
+              let result1 = await watson.changeText(self.state.input, original, foreign)
+              let userObj = [
+                    {
+                      languageType: original,
+                      text: self.state.input
+                    },
+                    {
+                      languageType: foreign,
+                      text: result1.translations[0].translation
+                    }
+                  ]
+              self.publishText(userObj)
+            } catch(err) { console.log(err)}
+        }
+      go()
   }
 
 
