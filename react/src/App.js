@@ -122,17 +122,8 @@ class App extends Component {
       });
   }
 
-  // settingUserName(signupDataArray) {
-  //   axios.post(`http://penpal.mybluemix.net/api/teachers`, {
-  //     username: signupDataArray[0],
-  //     email: signupDataArray[1],
-  //     primaryLanguage: signupDataArray[2],
-  //     password: signupDataArray[3],
-  //     timezone: signupDataArray[4],
-  //     studentAge: signupDataArray[5]
-
   settingUserName(userInfo) {
-    axios.post("http://penpal.mybluemix.net/api/teachers", {
+    axios.post(`http://penpal.mybluemix.net/api/teachers`, {
       username: userInfo[0],
       email: userInfo[1],
       city: userInfo[2],
@@ -140,16 +131,25 @@ class App extends Component {
       password: userInfo[4],
       timezone: userInfo[5],
       studentAge: userInfo[6]
-
-    }).then((res) => {
+    })
+    .then(res => {
       // WHEN YOU REGISTER SET THESE TWO COOKIES
-      Cookie.save('Lang', res.data.primaryLanguage, { path: '/' });
-      Cookie.save('userId', res.data.id, { path: '/' })
-      console.log(res);
-      Cookie.save('Lang', res.data.primaryLanguage, { path: '/' })
-      this.setState({ registeredUser: res.data, isLoggedIn: true });
+      Cookie.save('Lang', res.data.primaryLanguage, {
+        path: '/'
+      });
+      Cookie.save('userId', res.data.id, {
+        path: '/'
+      })
+      // console.log(res);
+      Cookie.save('Lang', res.data.primaryLanguage, {
+        path: '/'
+      })
+      this.setState({
+        registeredUser: res.data, isLoggedIn: true
+      });
       //console.log(this.state.registeredUser);
-    }).catch((err) => {
+    })
+    .catch(err => {
       console.log(err);
     });
   }

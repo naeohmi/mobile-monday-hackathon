@@ -12,7 +12,9 @@ class PubJr extends Component {
     }
     if (this.props.chatText) {
       return (
-        <div className="message" style={st}>{`${this.props.Lang}: ${this.props.chatText}`}</div>
+        <div className="message" style={st}>
+          {`${this.props.Lang}: ${this.props.chatText}`}
+        </div>
       )
     } else {
       return (

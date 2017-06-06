@@ -20,6 +20,8 @@ class Chat extends Component {
       final: "",
       result: []
     }
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.checkName = this.checkName.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -38,7 +40,6 @@ class Chat extends Component {
       // console.log("subscribed")
     }
     let listen = (self) => {
-
       this.Pub.addListener({
         status: function (statusEvent) {
           if (statusEvent.category === "PNConnectedCategory") {

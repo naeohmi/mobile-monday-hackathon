@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Config from './config';
 import Pubnub from 'pubnub';
-import PubJR from './PubJr';
+import PubJr from './PubJr';
 
 class PubNub extends Component {
   constructor(props) {
@@ -12,13 +12,12 @@ class PubNub extends Component {
       myArray: [],
       message: ""
     }
-    this.toChat = this.toChat.bind(this);
   }
   render() {
     console.log()
     return (
       <div className="pubnub">
-        <PubJR chatText={this.props.chatArray} />
+        <PubJr chatText={this.props.chatArray} />
       </div>
     )
   };
