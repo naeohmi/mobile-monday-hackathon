@@ -31,7 +31,6 @@ class Translate extends Component {
                 source: 'en',
                 target: 'es'
             },
-
                 function (err, translation) {
                     if (err) {
                         console.log('error:', err);
