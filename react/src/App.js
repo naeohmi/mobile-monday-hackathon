@@ -73,37 +73,65 @@ class App extends Component {
     );
   }
 
-  loggingUserName(submittedName, submittedPassword) {
-    axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {
-      username: submittedName,
-      password: submittedPassword
-    }).then((res) => {
-
-      console.log(res);
-      Cookie.save('userToken', res.data.id, { path: '/' })
-      Cookie.save('userId', res.data.userId, { path: '/' })
-      return res
-      //console.log(this.state.loggedInUser);
-    }).then((res) => {
-        let myRes = res
-    /// `http://penpal.mybluemix.net/api/teachers?access_token=${this.state.token}`
-    let y = `http://penpal.mybluemix.net/api/teachers/${Cookie.load('userId')}?access_token=${Cookie.load('userToken')}`
-   axios.get(y)
-   .then((result) => {
-        console.log("loggingUSerNAme function!!! the 2nd then ", result, myRes);
-        Cookie.save('userLang', result.data.primaryLanguage, { path: '/' })
-        this.setState({ loggedInUser: myRes.data, token: myRes.data.id, userID: myRes.data.userId, isLoggedIn: true,  userLang: result.data.primaryLanguage });
-         return  res.data.primaryLanguage
-      }).catch(function (err) {
-        console.log(err);
-      });
-
-    }).catch((err) => {
-      console.log(err);
-    });
 
 
+  // loggingUserName(submittedName, submittedPassword) {
+  //   axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {
+  //     username: submittedName,
+  //     password: submittedPassword
+  //   }).then((res) => {
+
+  //     console.log(res);
+  //     Cookie.save('userToken', res.data.id, { path: '/' })
+  //     Cookie.save('userId', res.data.userId, { path: '/' })
+  //     return res
+  //     //console.log(this.state.loggedInUser);
+  //   }).then((res) => {
+  //       let myRes = res
+  //   /// `http://penpal.mybluemix.net/api/teachers?access_token=${this.state.token}`
+  //   let y = `http://penpal.mybluemix.net/api/teachers/${Cookie.load('userId')}?access_token=${Cookie.load('userToken')}`
+  //  axios.get(y)
+  //  .then((result) => {
+  //       console.log("loggingUSerNAme function!!! the 2nd then ", result, myRes);
+  //       Cookie.save('userLang', result.data.primaryLanguage, { path: '/' })
+  //       this.setState({ loggedInUser: myRes.data, token: myRes.data.id, userID: myRes.data.userId, isLoggedIn: true,  userLang: result.data.primaryLanguage });
+  //        return  res.data.primaryLanguage
+  //     }).catch(function (err) {
+  //       console.log(err);
+  //     });
+
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   });
+  // }
+
+
+
+
+///////////////////////     refactored the LoggingUserName >>>  Es7 async   handle the promises
+
+  loggingUserName(submittedName, submittedPassword){
+            let self = this
+    async function getCredentials(){
+
+      try {
+        let res = await axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {username: submittedName, password: submittedPassword})
+        let res2 = await axios.get(`http://penpal.mybluemix.net/api/teachers/${res.data.userId}?access_token=${res.data.id}`)
+           Cookie.save('userToken', res.data.id, { path: '/' })
+           Cookie.save('userId', res.data.userId, { path: '/' })
+           Cookie.save('userLang', res2.data.primaryLanguage, { path: '/' })
+           self.setState({ loggedInUser: res.data, token: res.data.id, userID: res.data.userId, isLoggedIn: true,  userLang: res2.data.primaryLanguage });
+           console.log(res, "anddd ", res2)
+      }catch(err){console.log(err)}
+
+    }
+    getCredentials()
   }
+
+///////////////////////     refactored the LoggingUserName >>>  Es7 async   handle the promises
+
+
+
 
   logoutUserName() {
     Cookie.remove('userToken', { path: '/' });
