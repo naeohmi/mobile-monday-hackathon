@@ -10,12 +10,12 @@ export default {
     }),
     //translates the text input
     changeText: (inputText, Nativelang, ForiegnLang) => {
-        console.log(this.a);
+        console.log(inputText, Nativelang, ForiegnLang);
         let promise = new Promise((resolve) => {
             this.a.watson.translate({
                 text: inputText,
-                source: Nativelang, //TODO: change from user pref
-                target: 'es' //TODO: need to change this from user data
+                source: Nativelang, 
+                target: ForiegnLang 
             },
                 function (err, translation) {
                     if (err) {
@@ -30,16 +30,4 @@ export default {
         })
         return promise
     },
-
-
-
-
-
-
-
-
-
-
-
-
 }

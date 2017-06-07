@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 const WatsonTranslate = require('watson-developer-cloud/language-translator/v2');
 
 class Translate extends Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
             txtToTrans: "",
             lang: "",
@@ -17,10 +15,7 @@ class Translate extends Component {
             })
         }
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.callWatson = this.callWatson.bind(this);
-
     }
-    // this.translateText = this.translateText.bind(this);
     //initialize IMB Watson
     componentDidMount() {
         console.log(this.state.langTranslator)
@@ -31,7 +26,6 @@ class Translate extends Component {
                 source: 'en',
                 target: 'es'
             },
-
                 function (err, translation) {
                     if (err) {
                         console.log('error:', err);
