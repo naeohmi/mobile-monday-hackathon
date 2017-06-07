@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import axios from 'axios';
 import Cookie from 'react-cookies';
 import './App.css';
+
+// COMPONENTS
 import Chat from './components/Chat';
 import Landing from './components/Landing';
 import Navigation from './components/Navigation';
@@ -14,148 +16,141 @@ import NotFound from "./components/NotFound";
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isLoggedIn: false,
       registeredUser: [],
       loggedInUser: [],
-      token: Cookie.load('userToken'),
-      userLang: Cookie.load('Lang'),
-      userId: Cookie.load('userId')
+      userInfo: Cookie.load('PenPal-userInfo'),
+      logMessage: ""
     }
+
+    //testing cookie to make sure it loads user profile info when refreshing
+    console.log("cookie => ");
+    console.log(this.state.userInfo);
   }
+
   userStatusComponent() {
     return (
       <UserStatus
         isLoggedIn={this.state.isLoggedIn}
-        token={this.state.token}
-        userLang={this.state.userLang}
-        userId={this.state.userId}
+        userInfo={this.state.userInfo}
         logout={this.logoutUserName.bind(this)}
       />
     );
   }
+
   landingComponent() {
     return (
       <Landing logUserName={this.loggingUserName.bind(this)} />
     );
   }
+
   registerComponent() {
     return (
       <Register setUserName={this.settingUserName.bind(this)} />
     );
   }
+
   chatComponent() {
     return (
-      <Chat userLoggedIn={this.state.loggedInUser}
+      <Chat
+        userLoggedIn={this.state.loggedInUser}
         userRegistered={this.state.registeredUser}
         isLoggedIn={this.state.isLoggedIn}
+        userInfo={this.state.userInfo}
       />
     );
   }
+
   dashboardComponent() {
     return (
-      <Dashboard userLoggedIn={this.state.loggedInUser}
+      <Dashboard
+        userLoggedIn={this.state.loggedInUser}
         userRegistered={this.state.registeredUser}
         isLoggedIn={this.state.isLoggedIn}
+        userInfo={this.state.userInfo}
       />
     );
   }
+
   loggingUserName(submittedName, submittedPassword) {
-    axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {
+    axios.post(`http://penpal-server.herokuapp.com/auth/login`, {
       username: submittedName,
       password: submittedPassword
     })
-    .then(res => {
-      //refactored the LoggingUserName >>>  Es7 async   handle the promises
-      function loggingUserName(submittedName, submittedPassword){
+      .then(res => {
+        //refactored the LoggingUserName >>>  Es7 async   handle the promises
         let self = this;
         async function getCredentials() {
-
           try {
-            let res = await axios.post(`http://penpal.mybluemix.net/api/teachers/login`, {
+            let res = await axios.post(`http://penpal-server.herokuapp.com/auth/login`, {
               username: submittedName,
               password: submittedPassword
             })
-            let res2 = await axios.get(
-              `http://penpal.mybluemix.net/api/teachers/${res.data.userId}?access_token=${res.data.id}`
-            )
-            Cookie.save('userToken', res.data.id, {
-              path: '/'
-            })
-            Cookie.save('userId', res.data.userId, {
-              path: '/'
-            })
-            Cookie.save('userLang', res2.data.primaryLanguage, {
+            Cookie.save('PenPal-userInfo', res.data.user_profile, {
               path: '/'
             })
             self.setState({
-              loggedInUser: res.data,
-              token: res.data.id,
-              userID: res.data.userId,
-              isLoggedIn: true,
-              userLang: res2.data.primaryLanguage
+              loggedInUser: res.data.user_profile,
+              isLoggedIn: res.data.loggedIn,
+              logMessage: "",
             });
-            console.log(res, "anddd ", res2)
           }
           catch (err) {
-            console.log(err)
+            console.log(err);
           }
         }
         getCredentials();
-      }
-    })
+      })
   };
 
   logoutUserName() {
-    Cookie.remove('userToken', { path: '/' });
-    Cookie.remove('Lang', { path: '/' });
-    Cookie.remove('userId', { path: '/' });
-    this.setState({
-      isLoggedIn: false
-    });
-    //console.log("logout clicked");
-    axios.post("http://penpal.mybluemix.net/api/teachers/logout?access_token=" + this.state.token)
+    axios.get(`http://penpal-server.herokuapp.com/auth/logout`)
       .then(res => {
-        console.log(res);
+        Cookie.remove('PenPal-userInfo', { path: '/' });
+
+        this.setState({
+          isLoggedIn: res.data.loggedIn,
+          logMessage: ""
+        });
+
       }).catch(err => {
         console.log(err);
       });
   }
 
   settingUserName(userInfo) {
-    axios.post(`http://penpal.mybluemix.net/api/teachers`, {
+    axios.post(`http://penpal-server.herokuapp.com/auth/register`, {
       username: userInfo[0],
       email: userInfo[1],
       city: userInfo[2],
-      primaryLanguage: userInfo[3],
+      primarylanguage: userInfo[3],
       password: userInfo[4],
       timezone: userInfo[5],
-      studentAge: userInfo[6]
+      studentage: userInfo[6]
     })
-    .then(res => {
-      // WHEN YOU REGISTER SET THESE TWO COOKIES
-      Cookie.save('Lang', res.data.primaryLanguage, {
-        path: '/'
-      });
-      Cookie.save('userId', res.data.id, {
-        path: '/'
+      .then(res => {
+        // WHEN YOU REGISTER SET THIS COOKIE
+        Cookie.save('PenPal-userInfo', res.data.user_profile, {
+          path: '/'
+        })
+
+        this.setState({
+          registeredUser: res.data.user_profile,
+          isLoggedIn: res.data.loggedIn,
+          logMessage: res.data.message
+        });
+
       })
-      // console.log(res);
-      Cookie.save('Lang', res.data.primaryLanguage, {
-        path: '/'
-      })
-      this.setState({
-        registeredUser: res.data, isLoggedIn: true
+      .catch(err => {
+        console.log(err);
       });
-      //console.log(this.state.registeredUser);
-    })
-    .catch(err => {
-      console.log(err);
-    });
   }
+
   checkLogin(authPath) {
     // CHECK TO SEE IF COOKIES EXIST AND/OR LOGGED IN STATUS IS TRUE
-    if (this.state.isLoggedIn === true || this.state.userLang || this.state.token) {
+    if (this.state.isLoggedIn === true || this.state.userInfo) {
       switch (authPath) {
         case "/chat":
           return this.chatComponent();
@@ -177,31 +172,6 @@ class App extends Component {
     }
   }
 
-  // getUserID(){
-  //   let id;
-  //   //console.log(this.state.userId)
-  //   if(this.state.userId){
-  //     console.log("first");
-  //     id = this.state.userId;
-  //   } else if(this.state.registeredUser.id){
-  //     console.log("second");
-  //     id = this.state.registeredUser.id;
-  //   } else {
-  //     console.log("third");
-  //     id = this.state.loggedInUser.userId;
-  //   }
-  //   return id;
-  // }
-
-  getLanguage() {
-  axios.get(`http://penpal.mybluemix.net/api/teachers/${this.getUserID()}?access_token=${this.state.token}`)
-      .then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      })
-  }
-
   render() {
     return (
       <Router>
@@ -218,7 +188,6 @@ class App extends Component {
               <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
               <Route path="/*" component={() => (<NotFound />)} />
             </Switch>
-            {/*<button onClick={()=> this.getLanguage()}>getLang</button>*/}
           </div>
         </div>
       </Router>
