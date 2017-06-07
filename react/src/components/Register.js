@@ -45,7 +45,7 @@ export default class Register extends Component {
         return (
             <div>
                 <div>
-                    <p>username</p>
+                    <center><br/><p>username</p>
                     <p><input type="text" ref="username" /></p>
                     <p>email</p>
                     <p><input type="email" ref="email" /></p>
@@ -61,7 +61,7 @@ export default class Register extends Component {
                     <p>student age</p>
                     <p><input type="number" ref="studentAge" /></p>
                     <p><NavLink to="/">Already have an account? Login!</NavLink></p>
-                    <button onClick={() => this.getLongitutdeLatitude(this.refs.city.value)}>Create Account</button>
+                    <button onClick={() => this.getLongitutdeLatitude(this.refs.city.value)}>Create Account</button></center>
                 </div>
             </div>
         );

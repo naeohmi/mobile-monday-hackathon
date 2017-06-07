@@ -146,26 +146,25 @@ class App extends Component {
     }
   }
 
-  /*getUserID(){
+  getUserID(){
     let id;
-    //console.log(this.state.userId)
     if(this.state.userId){
-      console.log("first");
       id = this.state.userId;
+      console.log("first statement " + id);
     } else if(this.state.registeredUser.id){
-      console.log("second");
       id = this.state.registeredUser.id;
+      console.log("second statement " + id);
     } else {
-      console.log("third");
       id = this.state.loggedInUser.userId;
+      console.log("third statement " + id);
     }
     return id;
-  }*/
+  }
 
   getLanguage(){
     axios.get('http://penpal.mybluemix.net/api/teachers/' + this.getUserID() + '?access_token=' + this.state.token)
          .then((res) => {
-           console.log(res);
+           console.log(res.data.primaryLanguage);
          }).catch((err) => {
            console.log(err);
          })
@@ -187,7 +186,7 @@ class App extends Component {
               <Route path="/dashboard" render={() => this.checkLogin("/dashboard")}></Route>
               <Route path="/*" component={() => (<NotFound />)} />
             </Switch>
-            {/*<button onClick={()=> this.getLanguage()}>getLang</button>*/}
+            <button onClick={()=> this.getLanguage()}>getLang</button>
           </div>
         </div>
       </Router>
