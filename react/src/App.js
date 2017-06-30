@@ -4,14 +4,19 @@ import Landing from './components/Landing';
 import Navigation from './components/Navigation';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import UserStatus from "./components/UserStatus";
+import NotFound from "./components/NotFound";
 import axios from 'axios';
 import Cookie from 'react-cookies';
 import './App.css';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
+
+
 
 class App extends Component {
   constructor(props) {
