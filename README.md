@@ -5,6 +5,8 @@
 ## IntlPenPals
 IntlPenPals is a web application for global cultural exchange across languages. Classroom teachers register as users and are matched, as digital pen pals, with a classroom across the world; allowing students from different countries to communicate even when they speak different languages.
 
+## See the project live at: http://penpals.surge.sh
+
 ![yay-kids](./assets/muslim-kids.jpg)
 
 ## USER STORIES
